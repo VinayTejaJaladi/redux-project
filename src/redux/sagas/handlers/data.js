@@ -1,5 +1,5 @@
 import {call, put} from 'redux-saga/effects';
-import { SET_DATA } from '../../actions'
+import { SET_DATA } from '../../actions/index'
 import { getRequest } from '../requests/data'
 
 export function* handleGetData(action){

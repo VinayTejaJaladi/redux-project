@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { INCREMENT, DECREMENT, GET_DATA } from './actions';
+import { INCREMENT, DECREMENT, GET_DATA } from './redux/actions/index';
 import './App.css';
 
 function App() {
