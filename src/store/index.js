@@ -1,16 +1,20 @@
-import { createStore } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import createSagaMiddleware from 'redux-saga';
+import counterReducer from '../reducers/counterReducer';
+import fetchData from '../reducers/fetchData';
+import { watcherSaga } from "../sagas/sagas";
 
-const reducer = (state={counter:0},action) => {
-    switch (action.type) {
-        case 'INCREMENT':
-            return {counter:state.counter+1}  
-        case 'DECREMENT':
-            return {counter:state.counter-1} 
-        default:
-            return state
-    }
-}
+const reducer = combineReducers({
+    counter: counterReducer,
+    data: fetchData
+});
 
-const store = createStore(reducer);
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(
+  reducer,
+  applyMiddleware(sagaMiddleware)
+)
+
+sagaMiddleware.run(watcherSaga)
 
 export default store
